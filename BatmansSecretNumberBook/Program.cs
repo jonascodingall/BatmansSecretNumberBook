@@ -28,8 +28,8 @@ class Programm
             while (!int.TryParse(input, out inputParsed))
             {
                 input = Input("Nur Zahlen im Zahlenbereich eines Integers sind Erlaubt");
-            } 
-            
+            }
+
             switch (inputParsed)
             {
                 case 0:
@@ -136,7 +136,7 @@ class Programm
         {
             telefonbuch.DeleteKontakt(input);
         }
-        catch(InvalidOperationException e)
+        catch (InvalidOperationException e)
         {
             Print(e.Message);
         }
