@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BatmansSecretNumberBook.Migrations
 {
     [DbContext(typeof(BSNBContext))]
-    [Migration("20240123140600_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240124072202_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace BatmansSecretNumberBook.Migrations
 
             modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktBuisness", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("KontaktId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KontaktId"));
 
                     b.Property<string>("Nachname")
                         .IsRequired()
@@ -48,18 +48,18 @@ namespace BatmansSecretNumberBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("KontaktId");
 
                     b.ToTable("KontakteBuisness");
                 });
 
-            modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktPrivat", b =>
+            modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktPrivate", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("KontaktId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KontaktId"));
 
                     b.Property<string>("LieblingsHeld")
                         .IsRequired()
@@ -77,7 +77,7 @@ namespace BatmansSecretNumberBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("KontaktId");
 
                     b.ToTable("KontaktePrivate");
                 });
