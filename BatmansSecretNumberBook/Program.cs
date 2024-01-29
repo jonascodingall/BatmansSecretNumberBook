@@ -1,7 +1,16 @@
-﻿class Program
+﻿using BatmansSecretNumberBook;
+using BatmansSecretNumberBook.Data;
+using BatmansSecretNumberBook.Models;
+
+class Program
 {
     public static void Main()
     {
-        Console.WriteLine("Test");
+        var tb = new Telefonbuch();
+
+        tb.DeletePerson(new Person()
+        {
+            Id = 1
+        });
     }
 }

@@ -6,20 +6,19 @@ namespace BatmansSecretNumberBook.Data
     public class DatabaseContext : DbContext
     {
         public DbSet<Person> Personen { get; set; }
+        public DbSet<Kontakt> Kontakte { get; set; }
         public DbSet<KontaktPrivate> KontaktePrivat { get; set; }
         public DbSet<KontaktBusiness> KontakteBusiness { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<KontaktPrivate>().ToTable("KontaktPrivate")
-                                .HasOne(p => p.Person)
-                                .WithMany(k => k.Kontakte)
-                                .HasForeignKey(k => k.PersonId);
-            modelBuilder.Entity<KontaktBusiness>().ToTable("KontaktBusiness")
-                                .HasOne(p => p.Person)
-                                .WithMany(k => k.Kontakte)
-                                .HasForeignKey(k => k.PersonId);
+            modelBuilder.Entity<Kontakt>()
+                 .HasDiscriminator<string>("KontaktType")
+                 .HasValue<KontaktPrivate>("KontaktPrivate")
+                 .HasValue<KontaktBusiness>("KontaktBusiness");
         }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
