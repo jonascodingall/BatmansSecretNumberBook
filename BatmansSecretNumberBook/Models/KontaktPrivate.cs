@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatmansSecretNumberBook.Models
 {
-    [Table("KontaktPrivate")]
     public class KontaktPrivate : Kontakt
     {
         [Required]

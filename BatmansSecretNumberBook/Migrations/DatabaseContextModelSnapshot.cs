@@ -29,6 +29,11 @@ namespace BatmansSecretNumberBook.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("KontaktType")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
@@ -36,9 +41,11 @@ namespace BatmansSecretNumberBook.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("Kontakt");
+                    b.ToTable("Kontakte");
 
-                    b.UseTptMappingStrategy();
+                    b.HasDiscriminator<string>("KontaktType").HasValue("Kontakt");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("BatmansSecretNumberBook.Models.Person", b =>
@@ -70,7 +77,7 @@ namespace BatmansSecretNumberBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("KontaktBusiness", (string)null);
+                    b.HasDiscriminator().HasValue("KontaktBusiness");
                 });
 
             modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktPrivate", b =>
@@ -85,7 +92,7 @@ namespace BatmansSecretNumberBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("KontaktPrivate", (string)null);
+                    b.HasDiscriminator().HasValue("KontaktPrivate");
                 });
 
             modelBuilder.Entity("BatmansSecretNumberBook.Models.Kontakt", b =>
@@ -97,24 +104,6 @@ namespace BatmansSecretNumberBook.Migrations
                         .IsRequired();
 
                     b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktBusiness", b =>
-                {
-                    b.HasOne("BatmansSecretNumberBook.Models.Kontakt", null)
-                        .WithOne()
-                        .HasForeignKey("BatmansSecretNumberBook.Models.KontaktBusiness", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktPrivate", b =>
-                {
-                    b.HasOne("BatmansSecretNumberBook.Models.Kontakt", null)
-                        .WithOne()
-                        .HasForeignKey("BatmansSecretNumberBook.Models.KontaktPrivate", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("BatmansSecretNumberBook.Models.Person", b =>

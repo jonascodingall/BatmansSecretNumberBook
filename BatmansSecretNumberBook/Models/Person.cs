@@ -15,4 +15,4 @@ namespace BatmansSecretNumberBook.Models
 
         public List<Kontakt> Kontakte { get; set; } = new List<Kontakt>();
     }
-}
+} 
