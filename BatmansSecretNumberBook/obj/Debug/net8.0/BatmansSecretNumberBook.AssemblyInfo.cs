@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("d81c8418-4c51-443b-bdd5-83ff7a22ffa8")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BatmansSecretNumberBook")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb3ce36de99125830fe0895ae0f8c27dc7570365")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c6644f21ddef67e49be0f52e5760204dcb3edcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("BatmansSecretNumberBook")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BatmansSecretNumberBook")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

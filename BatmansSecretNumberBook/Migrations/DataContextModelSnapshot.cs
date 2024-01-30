@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BatmansSecretNumberBook.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DataContext))]
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace BatmansSecretNumberBook.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BatmansSecretNumberBook.Models.Kontakt", b =>
+            modelBuilder.Entity("BatmansSecretNumberBook.Models.Contact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,7 +29,7 @@ namespace BatmansSecretNumberBook.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("KontaktType")
+                    b.Property<string>("ContactType")
                         .IsRequired()
                         .HasMaxLength(21)
                         .HasColumnType("nvarchar(21)");
@@ -41,9 +41,9 @@ namespace BatmansSecretNumberBook.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("Kontakte");
+                    b.ToTable("Contacts");
 
-                    b.HasDiscriminator<string>("KontaktType").HasValue("Kontakt");
+                    b.HasDiscriminator<string>("ContactType").HasValue("Contact");
 
                     b.UseTphMappingStrategy();
                 });
@@ -56,11 +56,11 @@ namespace BatmansSecretNumberBook.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Nachname")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Vorname")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -69,36 +69,36 @@ namespace BatmansSecretNumberBook.Migrations
                     b.ToTable("Personen");
                 });
 
-            modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktBusiness", b =>
+            modelBuilder.Entity("BatmansSecretNumberBook.Models.ContactBusiness", b =>
                 {
-                    b.HasBaseType("BatmansSecretNumberBook.Models.Kontakt");
+                    b.HasBaseType("BatmansSecretNumberBook.Models.Contact");
 
-                    b.Property<string>("Geschäftsnummer")
+                    b.Property<string>("PhoneNumberBusiness")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("KontaktBusiness");
+                    b.HasDiscriminator().HasValue("ContactBusiness");
                 });
 
-            modelBuilder.Entity("BatmansSecretNumberBook.Models.KontaktPrivate", b =>
+            modelBuilder.Entity("BatmansSecretNumberBook.Models.ContactPrivate", b =>
                 {
-                    b.HasBaseType("BatmansSecretNumberBook.Models.Kontakt");
+                    b.HasBaseType("BatmansSecretNumberBook.Models.Contact");
 
-                    b.Property<string>("Lieblingsheld")
+                    b.Property<string>("FavouriteHero")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefonnummer")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("KontaktPrivate");
+                    b.HasDiscriminator().HasValue("ContactPrivate");
                 });
 
-            modelBuilder.Entity("BatmansSecretNumberBook.Models.Kontakt", b =>
+            modelBuilder.Entity("BatmansSecretNumberBook.Models.Contact", b =>
                 {
                     b.HasOne("BatmansSecretNumberBook.Models.Person", "Person")
-                        .WithMany("Kontakte")
+                        .WithMany("Contacts")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -108,7 +108,7 @@ namespace BatmansSecretNumberBook.Migrations
 
             modelBuilder.Entity("BatmansSecretNumberBook.Models.Person", b =>
                 {
-                    b.Navigation("Kontakte");
+                    b.Navigation("Contacts");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,7 +5,7 @@
 namespace BatmansSecretNumberBook.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitalCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,8 +16,8 @@ namespace BatmansSecretNumberBook.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Vorname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nachname = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,22 +25,22 @@ namespace BatmansSecretNumberBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Kontakt",
+                name: "Contacts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PersonId = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
-                    Geschäftsnummer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Lieblingsheld = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Telefonnummer = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ContactType = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    PhoneNumberBusiness = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavouriteHero = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kontakt", x => x.Id);
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Kontakt_Personen_PersonId",
+                        name: "FK_Contacts_Personen_PersonId",
                         column: x => x.PersonId,
                         principalTable: "Personen",
                         principalColumn: "Id",
@@ -48,8 +48,8 @@ namespace BatmansSecretNumberBook.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Kontakt_PersonId",
-                table: "Kontakt",
+                name: "IX_Contacts_PersonId",
+                table: "Contacts",
                 column: "PersonId");
         }
 
@@ -57,7 +57,7 @@ namespace BatmansSecretNumberBook.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Kontakt");
+                name: "Contacts");
 
             migrationBuilder.DropTable(
                 name: "Personen");

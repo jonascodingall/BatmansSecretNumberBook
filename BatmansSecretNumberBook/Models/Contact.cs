@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatmansSecretNumberBook.Models
 {
-    public abstract class Kontakt
+#nullable disable
+    public abstract class Contact
     {
         [Key]
         public int Id { get; set; }
@@ -12,6 +13,6 @@ namespace BatmansSecretNumberBook.Models
         [ForeignKey("Person")]
         public int PersonId { get; set; }
 
-        public Person Person { get; set; } = null!;
+        public Person Person { get; set; }
     }
 }
