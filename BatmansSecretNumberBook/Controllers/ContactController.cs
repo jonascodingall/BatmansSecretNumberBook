@@ -1,9 +1,11 @@
 ﻿using BatmansSecretNumberBook.DTOs;
+using BatmansSecretNumberBook.Models;
 using BatmansSecretNumberBook.Services.ContactServices;
 using BatmansSecretNumberBook.Services.PersonServices;
 using BatmansSecretNumberBook.Wrapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BatmansSecretNumberBook.Controllers
 {
@@ -20,42 +22,47 @@ namespace BatmansSecretNumberBook.Controllers
         #region C : Create
 
         [HttpPost]
-        public async Task<ActionResult<ContactDto>> CreateContact(ContactDto contact)
+        public async Task<ActionResult<Contact>> CreateContact(int personId, ContactDto contact)
         {
-            throw new NotImplementedException();
+            var result = await _contactService.CreateContactAsync(personId, contact);
+            return UnWrapResponse(result);
         }
 
         #endregion
         #region R : Read 
 
         [HttpGet]
-        public async Task<ActionResult<List<ContactDto>>> ReadAllContacts()
+        public async Task<ActionResult<List<Contact>>> ReadAllContacts()
         {
-            throw new NotImplementedException();
+            var result = await _contactService.ReadAllContactAsync();
+            return UnWrapResponse(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContactDto>> ReadSingleContact(int id)
+        public async Task<ActionResult<Contact>> ReadSingleContact(int id)
         {
-            throw new NotImplementedException();
+            var result = await _contactService.ReadSingleContactAsync(id);
+            return UnWrapResponse(result);
         }
 
         #endregion 
         #region U : Update
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ContactDto>> UpdateContact(int id, ContactDto contact)
+        public async Task<ActionResult<Contact>> UpdateContact(int id, ContactDto contact)
         {
-            throw new NotImplementedException();
+            var result = await _contactService.UpdateContactAsync(id, contact);
+            return UnWrapResponse(result);
         }
 
         #endregion
         #region D : Delete
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ContactDto>> DeleteContact(int id)
+        public async Task<ActionResult<Contact>> DeleteContact(int id)
         {
-            throw new NotImplementedException();
+            var result = await _contactService.DeleteContactAsync(id);
+            return UnWrapResponse(result);
         }
 
         #endregion

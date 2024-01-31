@@ -2,178 +2,158 @@
 using BatmansSecretNumberBook.Mappers;
 using BatmansSecretNumberBook.Wrapper;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BatmansSecretNumberBook.Services.ContactServices
 {
     public class ContactService : IContactServiceAsync
     {
         private readonly DataContext _context;
+
         public ContactService(DataContext context)
         {
             _context = context;
         }
-        public async Task<ResponseWrapper<ContactDto>> CreateContactAsync(ContactDto contact)
+
+        public async Task<ResponseWrapper<Contact>> CreateContactAsync(int personId, ContactDto contact)
         {
+            var person = await _context.Personen.FindAsync(personId);
+            if (person is null)
+            {
+                return new ResponseWrapper<Contact>()
+                {
+                    StatusCode = 404,
+                    Message = $"Person mit der id: {personId} konnte nicht gefunden werden",
+                    Data = null
+                };
+            }
             if (contact.Type == "private")
             {
-                _context.ContactsPrivate.Add(contact.ToContactPrivate());
+                var contactModel = contact.ToContactPrivate();
+                contactModel.PersonId = personId;
+                _context.ContactsPrivate.Add(contactModel);
                 await _context.SaveChangesAsync();
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
-                    StatusCode = 200,
-                    Message = "Privater Kontatkt wurde erfolgreich erstellt",
-                    Data = null
+                    StatusCode = 201,
+                    Message = "Privater Kontakt wurde erfolgreich erstellt",
+                    Data = contactModel
                 };
             }
             else if (contact.Type == "business")
             {
-                _context.ContactsBusiness.Add(contact.ToContactBusiness());
+                var contactModel = contact.ToContactBusiness();
+                contactModel.PersonId = personId;
+                _context.ContactsBusiness.Add(contactModel);
                 await _context.SaveChangesAsync();
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
                     StatusCode = 200,
-                    Message = "Geschftlicher Kontatkt wurde erfolgreich erstellt",
-                    Data = null
+                    Message = "Geschäftlicher Kontakt wurde erfolgreich erstellt",
+                    Data = contactModel
                 };
             }
             else
             {
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
                     StatusCode = 400,
-                    Message = "Invalider Typ von Type",
+                    Message = "Ungültiger Kontakttyp",
                     Data = null
                 };
             }
         }
 
-        public async Task<ResponseWrapper<ContactDto>> DeleteContactAsync(int id)
+        public async Task<ResponseWrapper<Contact>> DeleteContactAsync(int id)
         {
             var contact = await _context.ContactsBusiness.FindAsync(id);
-            if(contact is not null)
+            if (contact != null)
             {
                 _context.Contacts.Remove(contact);
                 await _context.SaveChangesAsync();
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
                     StatusCode = 200,
-                    Message = $"Kontakt mit der id: {id} wurder erfolgreich gelöscht",
-                    Data = contact.ToContactDto()
+                    Message = $"Kontakt mit der ID: {id} wurde erfolgreich gelöscht",
+                    Data = contact
                 };
             }
             else
             {
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
                     StatusCode = 404,
-                    Message = $"Kontakt mit der id: {id} konnte nicht gefunden werden",
+                    Message = $"Kontakt mit der ID: {id} konnte nicht gefunden werden",
                     Data = null
                 };
             }
         }
 
-        public async Task<ResponseWrapper<List<ContactDto>>> ReadAllContactAsync()
+        public async Task<ResponseWrapper<List<Contact>>> ReadAllContactAsync()
         {
             var contacts = await _context.Contacts.ToListAsync();
-            var contacsDto = new List<ContactDto>();
-            foreach (var contact in contacts)
-            {
-                if(contact is ContactPrivate contactPrivate)
-                {
-                    contacsDto.Add(contactPrivate.ToContactDto());
-                }
-                else if (contact is ContactBusiness contactBusiness)
-                {
-                    contacsDto.Add(contactBusiness.ToContactDto());
-                }
-            }
 
-            return new ResponseWrapper<List<ContactDto>>
+            return new ResponseWrapper<List<Contact>>
             {
                 StatusCode = 200,
                 Message = "",
-                Data = contacsDto
+                Data = contacts
             };
         }
 
-        public async Task<ResponseWrapper<ContactDto>> ReadSingleContactAsync(int id)
+        public async Task<ResponseWrapper<Contact>> ReadSingleContactAsync(int id)
         {
             var contact = await _context.Contacts.FindAsync(id);
-            if (contact is not null)
+            if (contact != null)
             {
-                if (contact is ContactPrivate contactPrivate)
+                return new ResponseWrapper<Contact>
                 {
-                    return new ResponseWrapper<ContactDto>
-                    {
-                        StatusCode = 200,
-                        Message = $"Kontakt mit der id: {id} wurde erfolgreich gelesen",
-                        Data = contactPrivate.ToContactDto()
-                    };
-                }
-                else if (contact is ContactBusiness contactBusiness)
-                {
-                    return new ResponseWrapper<ContactDto>
-                    {
-                        StatusCode = 200,
-                        Message = $"Kontakt mit der id: {id} wurde erfolgreich gelesen",
-                        Data = contactBusiness.ToContactDto()
-                    };
-                }
-                else
-                {
-                    return new ResponseWrapper<ContactDto>
-                    {
-                        StatusCode = 400,
-                        Message = $"Kontalt mit der id: {id} ist nicht von einem uns Bekannten Typ",
-                        Data = null
-                    };
-                }
+                    StatusCode = 200,
+                    Message = $"Kontakt mit der ID: {id} wurde erfolgreich gelesen",
+                    Data = contact
+                };
             }
             else
             {
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
                     StatusCode = 404,
-                    Message = $"Kontalt mit der id: {id} konnte nicht gefunden werden",
+                    Message = $"Kontakt mit der ID: {id} konnte nicht gefunden werden",
                     Data = null
                 };
             }
-
-            
         }
 
-        public async Task<ResponseWrapper<ContactDto>> UpdateContactAsync(int id, ContactDto request)
+        public async Task<ResponseWrapper<Contact>> UpdateContactAsync(int id, ContactDto request)
         {
             var contact = await _context.Contacts.FindAsync(id);
-            var contactDto = new ContactDto();
-            if (contact is not null)
+            if (contact != null)
             {
                 if (contact is ContactPrivate contactPrivate)
                 {
-                    contactDto = contactPrivate.ToContactDto();
+                    contactPrivate.FavouriteHero = request.FavouriteHero;
+                    contactPrivate.PhoneNumber = request.PhoneNumber;
                 }
                 else if (contact is ContactBusiness contactBusiness)
                 {
-                    contactDto = contactBusiness.ToContactDto();
+                    contactBusiness.PhoneNumberBusiness = request.PhoneNumberBusiness;
                 }
+                await _context.SaveChangesAsync();
 
-                contactDto.PhoneNumber = request.PhoneNumber;
-                contactDto.PhoneNumberBusiness = request.PhoneNumberBusiness;
-                contactDto.FavouriteHero = request.FavouriteHero;
-
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
                     StatusCode = 200,
-                    Message = $"Kontakt mit der id: {id} wurde erfolgreich geupdatet",
-                    Data = contactDto
+                    Message = $"Kontakt mit der ID: {id} wurde erfolgreich aktualisiert",
+                    Data = contact
                 };
             }
             else
             {
-                return new ResponseWrapper<ContactDto>
+                return new ResponseWrapper<Contact>
                 {
                     StatusCode = 404,
-                    Message = $"Kontalt mit der id: {id} konnte nicht gefunden werden",
+                    Message = $"Kontakt mit der ID: {id} konnte nicht gefunden werden",
                     Data = null
                 };
             }
