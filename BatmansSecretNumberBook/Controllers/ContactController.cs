@@ -9,10 +9,10 @@ namespace BatmansSecretNumberBook.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactPrivateController : ControllerBase
+    public class ContactController : ControllerBase
     {
         private readonly IContactServiceAsync _contactService;
-        public ContactPrivateController(IContactServiceAsync contactService)
+        public ContactController(IContactServiceAsync contactService)
         {
             _contactService = contactService;
         }
