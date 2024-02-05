@@ -3,26 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\dtos\\contactdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\dtos\\contactdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\contactbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\contactbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\contactprivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\contactprivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\services\\contactservices\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\services\\contactservices\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -31,8 +11,28 @@
       "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\contactprivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\contactprivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\contactbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\contactbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\dtos\\persondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\dtos\\persondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|c:\\users\\jkoelker\\source\\repos\\batmanssecretnumberbook\\batmanssecretnumberbook\\dtos\\contactdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718C2E6A-4344-4530-81C2-E63806774948}|BatmansSecretNumberBook\\BatmansSecretNumberBook.csproj|solutionrelative:batmanssecretnumberbook\\dtos\\contactdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +42,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 9,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "ContactDto.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Dtos\\ContactDto.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Dtos\\ContactDto.cs",
@@ -54,12 +62,11 @@
               "RelativeToolTip": "BatmansSecretNumberBook\\Dtos\\ContactDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-31T15:06:49.395Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-01-31T15:06:49.395Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "ContactPrivate.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Models\\ContactPrivate.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Models\\ContactPrivate.cs",
@@ -72,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ContactBusiness.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Models\\ContactBusiness.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Models\\ContactBusiness.cs",
@@ -85,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "PersonDto.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Dtos\\PersonDto.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Dtos\\PersonDto.cs",
@@ -98,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Person.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Models\\Person.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Models\\Person.cs",
@@ -110,16 +117,8 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Contact.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Models\\Contact.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Models\\Contact.cs",
@@ -132,20 +131,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "ContactController.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Controllers\\ContactController.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Controllers\\ContactController.cs",
               "ToolTip": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Controllers\\ContactController.cs",
               "RelativeToolTip": "BatmansSecretNumberBook\\Controllers\\ContactController.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAqwBoAAABPAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAABPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-01-30T16:52:18.444Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "ContactService.cs",
               "DocumentMoniker": "C:\\Users\\jkoelker\\source\\repos\\BatmansSecretNumberBook\\BatmansSecretNumberBook\\Services\\ContactServices\\ContactService.cs",
               "RelativeDocumentMoniker": "BatmansSecretNumberBook\\Services\\ContactServices\\ContactService.cs",
