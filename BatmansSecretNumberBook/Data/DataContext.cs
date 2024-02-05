@@ -2,7 +2,7 @@
 
 namespace BatmansSecretNumberBook.Data
 {
-    public class DatabaseContext : DbContext
+    public class DataContext : DbContext
     {
         public DbSet<Person> Personen { get; set; }
         public DbSet<Contact> Contacts { get; set; }

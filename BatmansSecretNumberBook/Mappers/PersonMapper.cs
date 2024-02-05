@@ -14,7 +14,7 @@
         #endregion
 
         #region Person To ResponseMapper
-        public static PersonResponseDto ToPerson(this Person personModel)
+        public static PersonResponseDto ToPersonResponseDto(this Person personModel)
         {
             return new PersonResponseDto
             {

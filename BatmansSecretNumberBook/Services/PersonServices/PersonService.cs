@@ -7,41 +7,43 @@ namespace BatmansSecretNumberBook.Services.PersonServices
 {
     public class PersonService : IPersonServiceAsync
     {
-        private readonly DatabaseContext _contex;
-        public PersonService(DatabaseContext context)
+        private readonly DataContext _context;
+        public PersonService(DataContext context)
         {
-            _contex = context;
+            _context = context;
         }
 
         public async Task<Person> CreatePersonAsync(Person person)
         {
-            _contex.Add(person);
-            await _contex.SaveChangesAsync();
+            _context.Add(person);
+            await _context.SaveChangesAsync();
 
-            return _contex.Personen.FirstOrDefault(person);
+            return await _context.Personen.FindAsync(person.Id) ?? throw new PersonNotFoundException();
         }
 
         public async Task<List<Person>> ReadAllPersonsAsync()
         {
-            return await _contex.Personen.ToListAsync();
+            return await _context.Personen.ToListAsync();
         }
 
         public async Task<Person> ReadSinglePersonAsync(int id)
         {
-            return await _contex.Personen.FindAsync(id) ?? throw new PersonNotFoundExeption();
+            return await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
         }
 
         public async Task<Person> UpdatePersonAsync(int id, Person newPerson)
         {
-            var person = await _contex.Personen.FindAsync(id) ?? throw new PersonNotFoundExeption();
+            var person = await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
             person.Update(newPerson);
-            return person;
+            await _context.SaveChangesAsync();
+            return await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
         }
 
         public async Task<Person> DeletePersonAsync(int id)
         {
-            var person = await _contex.Personen.FindAsync(id) ?? throw new PersonNotFoundExeption();
-            _contex.Remove(person);
+            var person = await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
+            _context.Remove(person);
+            await _context.SaveChangesAsync();
             return person;
         }
     }

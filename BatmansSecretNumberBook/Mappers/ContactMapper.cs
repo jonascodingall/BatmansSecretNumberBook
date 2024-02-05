@@ -1,13 +1,30 @@
-﻿namespace BatmansSecretNumberBook.Mappers
+﻿using BatmansSecretNumberBook.Models.ContactModels;
+
+namespace BatmansSecretNumberBook.Mappers
 {
     public static class ContactMapper
     {
         #region Request To Contact Mapper
+        public static Contact ToContact(this ContactRequestDto contactDto)
+        {
+            if (contactDto.Type == nameof(ContactBusiness))
+            {
+                return contactDto.ToContactBusiness();
+            }
+            else if (contactDto.Type == nameof(ContactPrivate))
+            {
+                return contactDto.ToContactPrivate();
+            }
+            else
+            {
+                throw new Exception("Falscher Typ");
+            }
+        }
+
         public static ContactPrivate ToContactPrivate(this ContactRequestDto contactDto)
         {
             return new ContactPrivate
             {
-                PersonId = contactDto.PersonId,
                 PhoneNumber = contactDto.PhoneNumber,
                 FavouriteHero = contactDto.FavouriteHero,
             };
@@ -17,13 +34,32 @@
         {
             return new ContactBusiness
             {
-                PersonId = contactDto.PersonId,
                 PhoneNumberBusiness = contactDto.PhoneNumberBusiness,
             };
         }
         #endregion
 
         #region Contact To Response Mapper
+        public static ContactResponseDto ToContactResponseDto(this Contact contactModel)
+        {
+            if (contactModel is ContactPrivate contactPrivate)
+            {
+                var contactDto = contactPrivate.ToContactResponseDto();
+                contactDto.Type = nameof(ContactPrivate);
+                return contactDto;
+            }
+            else if (contactModel is ContactBusiness contactBusiness)
+            {
+                var contactDto = contactBusiness.ToContactResponseDto();
+                contactDto.Type = nameof(ContactBusiness);
+                return contactDto;
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+
         public static ContactResponseDto ToContactResponseDto(this ContactPrivate contactModel)
         {
             return new ContactResponseDto
@@ -47,7 +83,7 @@
         #endregion
 
         #region Contact To Contact
-        public static void Update(this Contact contact, Contact newContact)
+        public static void UpdateContact(this Contact contact, Contact newContact)
         {
             if (contact.GetType() != newContact.GetType())
             {
@@ -56,16 +92,15 @@
 
             if (contact is ContactBusiness contactBusiness)
             {
-                contactBusiness.Update(contact);
+                contactBusiness.Update((ContactBusiness)newContact);
             }
             else if (contact is ContactPrivate contactPrivate)
             {
-                contactPrivate.Update(newContact);
+                contactPrivate.Update((ContactPrivate)newContact);
             }
         }
         public static void Update(this ContactPrivate contact, ContactPrivate newContact)
         {
-            contact.PersonId = newContact.PersonId;
             contact.FavouriteHero = newContact.FavouriteHero;
             contact.PhoneNumber = newContact.PhoneNumber;
         }

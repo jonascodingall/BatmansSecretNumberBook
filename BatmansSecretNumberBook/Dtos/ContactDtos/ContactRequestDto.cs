@@ -7,6 +7,5 @@
         public string PhoneNumber { get; set; }
         public string PhoneNumberBusiness {  get; set; }
         public string FavouriteHero { get; set; }
-        public int PersonId { get; set; }
     }
 }

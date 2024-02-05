@@ -9,18 +9,18 @@ namespace BatmansSecretNumberBook.Services.ContactServices
 {
     public class ContactService : IContactServiceAsync
     {
-        private readonly DatabaseContext _context;
-        public ContactService(DatabaseContext context)
+        private readonly DataContext _context;
+        public ContactService(DataContext context)
         {
             _context = context;
         }
 
         public async Task<Contact> CreateContactAsync(int personId, Contact contact)
         {
-            contact.PersonId = _context.Contacts.Find(personId)?.PersonId ?? throw new PersonNotFoundExeption();
+            contact.PersonId = _context.Personen.Find(personId)?.Id ?? throw new PersonNotFoundException();
             _context.Add(contact);
             await _context.SaveChangesAsync();
-            return _context.Contacts.FirstOrDefault(contact);
+            return _context.Contacts.Find(contact.Id) ?? throw new ContactNotFoundException();
         }
 
         public async Task<List<Contact>> ReadAllContactAsync()
@@ -30,20 +30,22 @@ namespace BatmansSecretNumberBook.Services.ContactServices
 
         public async Task<Contact> ReadSingleContactAsync(int id)
         {
-            return await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundExeption();
+            return await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
         }
 
         public async Task<Contact> UpdateContactAsync(int id, Contact newContact)
         {
-            var contact = await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundExeption();
-            contact.Update(newContact);
-            return newContact;
-            
+            var contact = await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
+            contact.UpdateContact(newContact);
+            await _context.SaveChangesAsync();
+            return await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
         }
+
         public async Task<Contact> DeleteContactAsync(int id)
         {
-            var contact = await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundExeption();
+            var contact = await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
             _context.Remove(contact);
+            await _context.SaveChangesAsync();
             return contact;
         }
     }
