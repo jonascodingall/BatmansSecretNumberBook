@@ -1,4 +1,4 @@
-﻿namespace BatmansSecretNumberBook.Dtos.Person
+﻿namespace BatmansSecretNumberBook.Dtos.PersonDto
 {
     public class PersonRequestDto
     {

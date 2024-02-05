@@ -1,3 +1,9 @@
+global using BatmansSecretNumberBook.Dtos.PersonDto;
+global using BatmansSecretNumberBook.Dtos.ContactDto;
+global using BatmansSecretNumberBook.Models.PersonModels;
+global using BatmansSecretNumberBook.Models.ContactModels;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
