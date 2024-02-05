@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BatmansSecretNumberBook")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ec6bf61283d238d7065baed53a154637b15ac0f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BatmansSecretNumberBook")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BatmansSecretNumberBook")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
