@@ -24,5 +24,13 @@
             };
         }
         #endregion
+
+        #region Person To Person
+        public static void Update(this Person person, Person newPerson)
+        {
+            person.FirstName = newPerson.FirstName;
+            person.LastName = newPerson.LastName;
+        }
+        #endregion
     }
 }
