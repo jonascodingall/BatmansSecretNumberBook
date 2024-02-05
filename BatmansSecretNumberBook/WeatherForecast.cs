@@ -1,4 +1,4 @@
-namespace SuperHeroAPI
+namespace BatmansSecretNumberBook
 {
     public class WeatherForecast
     {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace SuperHeroAPI.Controllers
+namespace BatmansSecretNumberBook.Controllers
 {
     [ApiController]
     [Route("[controller]")]
