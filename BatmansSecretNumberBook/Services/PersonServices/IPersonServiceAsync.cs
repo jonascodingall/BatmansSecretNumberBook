@@ -1,6 +1,6 @@
 ﻿namespace BatmansSecretNumberBook.Services.PersonServices
 {
-    public interface IPersonServiceAsync
+    public interface IPersonServiceAsync : IPersonService
     {
         Task<Person> CreatePersonAsync(Person person);
         Task<List<Person>> ReadAllPersonsAsync();

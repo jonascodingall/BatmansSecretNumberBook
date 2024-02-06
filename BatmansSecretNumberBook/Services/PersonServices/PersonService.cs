@@ -1,11 +1,12 @@
-﻿using BatmansSecretNumberBook.Data;
+﻿using BatmansSecretNumberBook.Core;
+using BatmansSecretNumberBook.Data;
 using BatmansSecretNumberBook.Exeptions;
 using BatmansSecretNumberBook.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace BatmansSecretNumberBook.Services.PersonServices
 {
-    public class PersonService : IPersonServiceAsync
+    public class PersonService : IPersonService
     {
         private readonly DataContext _context;
         public PersonService(DataContext context)
@@ -13,38 +14,56 @@ namespace BatmansSecretNumberBook.Services.PersonServices
             _context = context;
         }
 
-        public async Task<Person> CreatePersonAsync(Person person)
+        public Person CreatePerson(Person person)
         {
-            _context.Add(person);
-            await _context.SaveChangesAsync();
-
-            return await _context.Personen.FindAsync(person.Id) ?? throw new PersonNotFoundException();
-        }
-
-        public async Task<List<Person>> ReadAllPersonsAsync()
-        {
-            return await _context.Personen.ToListAsync();
-        }
-
-        public async Task<Person> ReadSinglePersonAsync(int id)
-        {
-            return await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
-        }
-
-        public async Task<Person> UpdatePersonAsync(int id, Person newPerson)
-        {
-            var person = await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
-            person.Update(newPerson);
-            await _context.SaveChangesAsync();
-            return await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
-        }
-
-        public async Task<Person> DeletePersonAsync(int id)
-        {
-            var person = await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
-            _context.Remove(person);
-            await _context.SaveChangesAsync();
+            using (var uow = new UnitOfWork(_context))
+            {
+                uow.Persons.Add(person);
+                person = uow.Persons.FirstOrDefault(person) ?? throw new PersonNotFoundException();
+                uow.Complete();
+            }
             return person;
+        }
+
+        public List<Person> ReadAllPersons()
+        {
+            using (var uow = new UnitOfWork(_context))
+            {
+                return uow.Persons.GetAll().ToList();
+            }
+        }
+
+        public Person ReadSinglePerson(int id)
+        {
+            using (var uow = new UnitOfWork(_context))
+            {
+                return uow.Persons.Get(id) ?? throw new PersonNotFoundException();
+            }
+        }
+
+        public Person UpdatePerson(int id, Person newPerson)
+        {
+            Person person;
+            using (var uow = new UnitOfWork(_context))
+            {
+                person = uow.Persons.Get(id) ?? throw new PersonNotFoundException();
+                person.Update(newPerson);
+                person = uow.Persons.FirstOrDefault(person) ?? throw new PersonNotFoundException();
+                uow.Complete();
+                return person;
+            }
+        }
+
+        public Person DeletePerson(int id)
+        {
+            Person person;
+            using (var uow = new UnitOfWork(_context))
+            {
+                person = uow.Persons.Get(id) ?? throw new PersonNotFoundException();
+                uow.Persons.Remove(person);
+                uow.Complete();
+                return person;
+            }
         }
     }
 }

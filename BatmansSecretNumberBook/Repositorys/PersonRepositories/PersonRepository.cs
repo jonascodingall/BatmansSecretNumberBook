@@ -12,5 +12,10 @@ namespace BatmansSecretNumberBook.Repositorys.PersonRepositories
         public PersonRepository(DbContext context) : base(context)
         {
         }
+
+        public Person? FirstOrDefault(Person person)
+        {
+            return _context.Set<Person>().FirstOrDefault(person);
+        }
     }
 }
