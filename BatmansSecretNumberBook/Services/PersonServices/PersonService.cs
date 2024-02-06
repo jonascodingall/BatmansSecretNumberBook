@@ -1,69 +1,48 @@
-﻿using BatmansSecretNumberBook.Core;
-using BatmansSecretNumberBook.Data;
+﻿using BatmansSecretNumberBook.Data;
 using BatmansSecretNumberBook.Exeptions;
 using BatmansSecretNumberBook.Mappers;
+using BatmansSecretNumberBook.Repositorys;
 using Microsoft.EntityFrameworkCore;
 
 namespace BatmansSecretNumberBook.Services.PersonServices
 {
-    public class PersonService : IPersonService
+    public class PersonService : IPersonServiceAsync
     {
-        private readonly DataContext _context;
-        public PersonService(DataContext context)
+        private readonly IRepositoryAsync<Person> _personRepository;
+
+        public PersonService(IRepositoryAsync<Person> personRepository)
         {
-            _context = context;
+            _personRepository = personRepository;
         }
 
-        public Person CreatePerson(Person person)
+        public async Task CreatePersonAsync(Person person)
         {
-            using (var uow = new UnitOfWork(_context))
-            {
-                uow.Persons.Add(person);
-                person = uow.Persons.FirstOrDefault(person) ?? throw new PersonNotFoundException();
-                uow.Complete();
-            }
-            return person;
+            await _personRepository.AddAsync(person);
+            await _personRepository.SaveChangesAsync();
         }
 
-        public List<Person> ReadAllPersons()
+        public async Task DeletePersonAsync(int id)
         {
-            using (var uow = new UnitOfWork(_context))
-            {
-                return uow.Persons.GetAll().ToList();
-            }
+            var person = await _personRepository.GetAsync(id);
+            _personRepository.Remove(person);
+            await _personRepository.SaveChangesAsync();
         }
 
-        public Person ReadSinglePerson(int id)
+        public async Task<IEnumerable<Person>> ReadAllPersonsAsync()
         {
-            using (var uow = new UnitOfWork(_context))
-            {
-                return uow.Persons.Get(id) ?? throw new PersonNotFoundException();
-            }
+            return await _personRepository.GetAllAsync();
         }
 
-        public Person UpdatePerson(int id, Person newPerson)
+        public async Task<Person> ReadSinglePersonAsync(int id)
         {
-            Person person;
-            using (var uow = new UnitOfWork(_context))
-            {
-                person = uow.Persons.Get(id) ?? throw new PersonNotFoundException();
-                person.Update(newPerson);
-                person = uow.Persons.FirstOrDefault(person) ?? throw new PersonNotFoundException();
-                uow.Complete();
-                return person;
-            }
+            return await _personRepository.GetAsync(id);
         }
 
-        public Person DeletePerson(int id)
+        public async Task UpdatePersonAsync(int id, Person newPerson)
         {
-            Person person;
-            using (var uow = new UnitOfWork(_context))
-            {
-                person = uow.Persons.Get(id) ?? throw new PersonNotFoundException();
-                uow.Persons.Remove(person);
-                uow.Complete();
-                return person;
-            }
+            var person = await _personRepository.GetAsync(1);
+            person.Update(newPerson);
+            await _personRepository.SaveChangesAsync();
         }
     }
 }

@@ -3,17 +3,19 @@ using System.Linq.Expressions;
 
 namespace BatmansSecretNumberBook.Repositorys
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TDbContext, TEntity> : IRepository<TEntity> 
+        where TDbContext : DbContext
+        where TEntity : class
     {
-        protected readonly DbContext _context;
-        public Repository(DbContext context)
+        protected readonly TDbContext _context;
+        public Repository(TDbContext context)
         {
             _context = context;
         }
 
-        public TEntity? Get(int id)
+        public async Task<TEntity?> Get(int id)
         {
-            return _context.Set<TEntity>().Find(id);
+            return await _context.Set<TEntity>().FindAsync(id);
         }
         public IEnumerable<TEntity> GetAll()
         {
