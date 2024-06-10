@@ -2,6 +2,8 @@
 using BatmansSecretNumberBook.Data;
 using BatmansSecretNumberBook.Exeptions;
 using BatmansSecretNumberBook.Mappers;
+using BatmansSecretNumberBook.Models.PersonModels;
+using BatmansSecretNumberBook.Repositorys;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -9,44 +11,40 @@ namespace BatmansSecretNumberBook.Services.ContactServices
 {
     public class ContactService : IContactServiceAsync
     {
-        private readonly DataContext _context;
-        public ContactService(DataContext context)
+        private readonly IRepositoryAsync<Contact> _contactRepository;
+        public ContactService(IRepositoryAsync<Contact> personRepository)
         {
-            _context = context;
+            _contactRepository = personRepository;
         }
 
-        public async Task<Contact> CreateContactAsync(int personId, Contact contact)
+        public async Task CreateContactAsync(Contact contact)
         {
-            contact.PersonId = _context.Personen.Find(personId)?.Id ?? throw new PersonNotFoundException();
-            _context.Add(contact);
-            await _context.SaveChangesAsync();
-            return _context.Contacts.Find(contact.Id) ?? throw new ContactNotFoundException();
+            await _contactRepository.AddAsync(contact);
+            await _contactRepository.SaveChangesAsync();
         }
 
-        public async Task<List<Contact>> ReadAllContactAsync()
+        public async Task DeleteContactAsync(int id)
         {
-            return await _context.Contacts.ToListAsync();
+            var contact = await _contactRepository.GetAsync(id);
+            _contactRepository.Remove(contact);
+            await _contactRepository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Contact>> ReadAllContactAsync()
+        {
+            return await _contactRepository.GetAllAsync();
         }
 
         public async Task<Contact> ReadSingleContactAsync(int id)
         {
-            return await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
+            return await _contactRepository.GetAsync(id);
         }
 
-        public async Task<Contact> UpdateContactAsync(int id, Contact newContact)
+        public async Task UpdateContactAsync(int id, Contact newContact)
         {
-            var contact = await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
+            var contact = await _contactRepository.GetAsync(1);
             contact.UpdateContact(newContact);
-            await _context.SaveChangesAsync();
-            return await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
-        }
-
-        public async Task<Contact> DeleteContactAsync(int id)
-        {
-            var contact = await _context.Contacts.FindAsync(id) ?? throw new ContactNotFoundException();
-            _context.Remove(contact);
-            await _context.SaveChangesAsync();
-            return contact;
+            await _contactRepository.SaveChangesAsync();
         }
     }
 }

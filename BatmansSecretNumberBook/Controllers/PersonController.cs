@@ -1,11 +1,9 @@
 ﻿using BatmansSecretNumberBook.Exeptions;
 using BatmansSecretNumberBook.Mappers;
 using BatmansSecretNumberBook.Services.PersonServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
-namespace BatmansSecretNumberBook.Controllers.Person
+namespace BatmansSecretNumberBook.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,12 +17,12 @@ namespace BatmansSecretNumberBook.Controllers.Person
 
 
         [HttpPost]
-        public async Task<ActionResult<PersonResponseDto>> CreatePerson(PersonRequestDto person)
+        public async Task<ActionResult> CreatePerson(PersonRequestDto personDto)
         {
             try
             {
-                var result = await _personService.CreatePersonAsync(person.ToPerson());
-                return CreatedAtAction(nameof(ReadSinglePerson), new { id = result.Id }, result.ToPersonResponseDto());
+                await _personService.CreatePersonAsync(personDto.ToPerson());
+                return Created();
             }
             catch (Exception ex)
             {
@@ -59,12 +57,12 @@ namespace BatmansSecretNumberBook.Controllers.Person
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<PersonResponseDto>> UpdatePerson(int id, PersonRequestDto person)
+        public async Task<ActionResult> UpdatePerson(int id, PersonRequestDto person)
         {
             try
             {
-                var result = await _personService.UpdatePersonAsync(id, person.ToPerson());
-                return Ok(result.ToPersonResponseDto());
+                await _personService.UpdatePersonAsync(id, person.ToPerson());
+                return Ok();
             }
             catch (PersonNotFoundException)
             {
@@ -73,12 +71,12 @@ namespace BatmansSecretNumberBook.Controllers.Person
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonResponseDto>> DeletePerson(int id)
+        public async Task<ActionResult> DeletePerson(int id)
         {
             try
             {
-                var result = await _personService.DeletePersonAsync(id);
-                return Ok(result.ToPersonResponseDto());
+                await _personService.DeletePersonAsync(id);
+                return Ok();
             }
             catch (PersonNotFoundException)
             {

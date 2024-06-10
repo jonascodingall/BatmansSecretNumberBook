@@ -3,7 +3,7 @@ using BatmansSecretNumberBook.Mappers;
 using BatmansSecretNumberBook.Services.ContactServices;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BatmansSecretNumberBook.Controllers.Contact
+namespace BatmansSecretNumberBook.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,12 +16,14 @@ namespace BatmansSecretNumberBook.Controllers.Contact
         }
 
         [HttpPost]
-        public async Task<ActionResult<ContactResponseDto>> CreateContact(int personId, ContactRequestDto contact)
+        public async Task<ActionResult> CreateContact(int personId, ContactRequestDto contactDto)
         {
             try
             {
-                var result = await _contactService.CreateContactAsync(personId, contact.ToContact());
-                return CreatedAtAction(nameof(ReadSingleContact), new { id = result.Id }, result.ToContactResponseDto());
+                var contact = contactDto.ToContact();
+                contact.PersonId = personId;
+                await _contactService.CreateContactAsync(contact);
+                return Created();
             }
             catch (PersonNotFoundException)
             {
@@ -60,12 +62,12 @@ namespace BatmansSecretNumberBook.Controllers.Contact
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ContactResponseDto>> UpdateContact(int id, ContactRequestDto contact)
+        public async Task<ActionResult> UpdateContact(int id, ContactRequestDto contact)
         {
             try
             {
-                var result = await _contactService.UpdateContactAsync(id, contact.ToContact());
-                return Ok(result.ToContactResponseDto());
+                await _contactService.UpdateContactAsync(id, contact.ToContact());
+                return Ok();
             }
             catch (ContactNotFoundException)
             {
@@ -74,12 +76,12 @@ namespace BatmansSecretNumberBook.Controllers.Contact
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ContactResponseDto>> DeleteContact(int id)
+        public async Task<ActionResult> DeleteContact(int id)
         {
             try
             {
-                var result = await _contactService.DeleteContactAsync(id);
-                return Ok(result.ToContactResponseDto());
+                await _contactService.DeleteContactAsync(id);
+                return Ok();
             }
             catch (ContactNotFoundException)
             {

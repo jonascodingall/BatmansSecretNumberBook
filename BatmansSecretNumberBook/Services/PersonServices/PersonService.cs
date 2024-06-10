@@ -1,50 +1,48 @@
 ﻿using BatmansSecretNumberBook.Data;
 using BatmansSecretNumberBook.Exeptions;
 using BatmansSecretNumberBook.Mappers;
+using BatmansSecretNumberBook.Repositorys;
 using Microsoft.EntityFrameworkCore;
 
 namespace BatmansSecretNumberBook.Services.PersonServices
 {
     public class PersonService : IPersonServiceAsync
     {
-        private readonly DataContext _context;
-        public PersonService(DataContext context)
+        private readonly IRepositoryAsync<Person> _personRepository;
+
+        public PersonService(IRepositoryAsync<Person> personRepository)
         {
-            _context = context;
+            _personRepository = personRepository;
         }
 
-        public async Task<Person> CreatePersonAsync(Person person)
+        public async Task CreatePersonAsync(Person person)
         {
-            _context.Add(person);
-            await _context.SaveChangesAsync();
-
-            return await _context.Personen.FindAsync(person.Id) ?? throw new PersonNotFoundException();
+            await _personRepository.AddAsync(person);
+            await _personRepository.SaveChangesAsync();
         }
 
-        public async Task<List<Person>> ReadAllPersonsAsync()
+        public async Task DeletePersonAsync(int id)
         {
-            return await _context.Personen.ToListAsync();
+            var person = await _personRepository.GetAsync(id);
+            _personRepository.Remove(person);
+            await _personRepository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Person>> ReadAllPersonsAsync()
+        {
+            return await _personRepository.GetAllAsync();
         }
 
         public async Task<Person> ReadSinglePersonAsync(int id)
         {
-            return await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
+            return await _personRepository.GetAsync(id);
         }
 
-        public async Task<Person> UpdatePersonAsync(int id, Person newPerson)
+        public async Task UpdatePersonAsync(int id, Person newPerson)
         {
-            var person = await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
+            var person = await _personRepository.GetAsync(1);
             person.Update(newPerson);
-            await _context.SaveChangesAsync();
-            return await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
-        }
-
-        public async Task<Person> DeletePersonAsync(int id)
-        {
-            var person = await _context.Personen.FindAsync(id) ?? throw new PersonNotFoundException();
-            _context.Remove(person);
-            await _context.SaveChangesAsync();
-            return person;
+            await _personRepository.SaveChangesAsync();
         }
     }
 }

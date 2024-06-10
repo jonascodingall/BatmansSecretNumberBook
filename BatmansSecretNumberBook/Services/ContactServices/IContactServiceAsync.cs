@@ -2,10 +2,10 @@
 {
     public interface IContactServiceAsync
     {
-        Task<Contact> CreateContactAsync(int personId, Contact contact);
-        Task<List<Contact>> ReadAllContactAsync();
+        Task CreateContactAsync(Contact contact);
+        Task<IEnumerable<Contact>> ReadAllContactAsync();
         Task<Contact> ReadSingleContactAsync(int id);
-        Task<Contact> UpdateContactAsync(int id, Contact newContact);
-        Task<Contact> DeleteContactAsync(int id);
+        Task UpdateContactAsync(int id, Contact newContact);
+        Task DeleteContactAsync(int id);
     }
 }

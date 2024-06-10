@@ -5,6 +5,7 @@ global using BatmansSecretNumberBook.Models.ContactModels;
 using BatmansSecretNumberBook.Services.ContactServices;
 using BatmansSecretNumberBook.Services.PersonServices;
 using BatmansSecretNumberBook.Data;
+using BatmansSecretNumberBook.Repositorys;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +16,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<DataContext>();
+builder.Services.AddScoped<IRepositoryAsync<Person>, RepositoryAsync<DataContext, Person>>();
+builder.Services.AddScoped<IRepositoryAsync<Contact>, RepositoryAsync<DataContext, Contact>>();
 builder.Services.AddScoped<IPersonServiceAsync, PersonService>();
 builder.Services.AddScoped<IContactServiceAsync, ContactService>();
-builder.Services.AddDbContext<DataContext>();
+
 
 var app = builder.Build();
 
